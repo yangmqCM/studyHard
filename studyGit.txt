@@ -270,6 +270,18 @@ https://git-scm.com/book/zh/v1/（官网详细教程）
 http://git.mydoc.io/?t=154712（码云文档）
 
 
+http://top.jobbole.com/34832/ 小心！别在Github上泄露了你Slack的token
+Slack官方声明
+在声明中，Slack写到：
+
+Slack很清楚，token应该被跟密码一样对待。当开发者们生成token时，我们会警告他们不要分享给其他用户或其他程序。我们客户的安全对我们至关重要，我们会持续改进我们的文档，提醒客户保证安全。
+
+我们在监控着公开的token，一旦我们发现了公开的token，我们会撤销他们并且通知创建token的用户和受影响的团队。
+
+如何防范
+Slack监控公开token的做法值得肯定，但是token上传的速度太快了，可能手速快的黑客可以在撤销之前找到它们。把Slack脚本/机器人上传到Github不应该把token一起上传上去，而是应该使用环境变量使token不出现在代码里面
+
+
 
 
 
