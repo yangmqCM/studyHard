@@ -151,8 +151,10 @@ $ cd studyHard
 admin@admin-PC MINGW64 /e    //把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库
 $ git remote add origin git@github.com:yangmqCM/studyHard.git
 
-admin@admin-PC MINGW64 /e/studyHard (master) //把本地库的所有内容推送到远程库上
+admin@admin-PC MINGW64 /e/studyHard (master) //第一次把本地库的所有内容推送到远程库上
 $ git push -u origin master
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 
 Counting objects: 21, done.
 Delta compression using up to 8 threads.
