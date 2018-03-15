@@ -3,3 +3,274 @@ Git is free software distributed under the Gpl
 Git的命令实在是太多了，焦灼咋记录哟。
 多次使用，记得使用，每天使用，每天重复
 学无止境，马不停蹄，每天学习，每天进步，不骄不躁，不懈怠
+
+接下来表达一下我学习git的过程（总结）：
+https://git-scm.com/downloads 下载安装
+
+https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013752340242354807e192f02a44359908df8a5643103a000   廖雪峰的官方网站(这里我没有参考官方的教程)
+
+https://git-scm.com/book/zh/v1/（官网详细教程）
+
+http://git.mydoc.io/?t=154712（码云文档）
+
+下面是我学习廖雪峰的官方网站的指令
+开始>git>git bash
+1.建立本地的git库
+admin@admin-PC MINGW64 ~
+$ git config --global user.name "yangmq"
+
+admin@admin-PC MINGW64 ~
+$ git config --global user.email 15827408750@163.com
+
+admin@admin-PC MINGW64 ~
+$ mkdir E:/studyHard
+
+admin@admin-PC MINGW64 ~
+$ cd E:/studyHard
+
+admin@admin-PC MINGW64 /e/studyHard
+$ pwd
+/e/studyHard
+
+admin@admin-PC MINGW64 /e/studyHard
+$ git init
+Initialized empty Git repository in E:/studyHard/.git/
+
+2.本地文件add到缓存区，然后提交到本地git库
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git add studyGit.txt
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git commit -m "wrote a readme file"
+ 
+ 
+3.熟悉git命令的使用
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git log --pretty=online 
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git reset --hard HEAD^ 
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ cat studyGit.txt
+ 
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git reflog 
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git status 
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git rm test.txt 
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git commit -m "remove test.txt" 
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git checkout -- test.txt
+
+4.在github上注册，创建一个github，然后把本地git同步到github上
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git remote add origin git@github.com:yangmqCM/studyHard.git
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git push -u origin master
+
+The authenticity of host 'github.com (192.30.253.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.253.112' (RSA) to the list of know                                                                                                                                                                                               n hosts.
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+4.1.1  Permission denied (publickey).显然这里出现了问题！！！！！
+这里没有ssh
+检测一下
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ ssh -t git@github.com
+Permission denied (publickey).
+
+创建一个ssh
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ ssh-keygen -t rsa -C "15827408750@163.com"
+
+你可以去/c/Users/admin/.ssh/id_rsa.pub.复制出来，
+也可以使用$ cat ~/.ssh/id_rsa.pub查看，然后复制出来，
+然后在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
+setting>SSH and GPG keys >SSH Keys 
+
+标题：自主，但是自己要清楚：例如git-tutorial
+key就是/c/Users/admin/.ssh/id_rsa.pub.文件中的内容
+
+检测是否成功
+admin@admin-PC MINGW64 ~/.ssh
+$ ssh git@github.com
+
+admin@admin-PC MINGW64 /e/studyHard (master)  
+$ git push -u origin master
+
+end....你可以去你的github上看你的东西了。
+
+ 出现异常情况：
+（1）搭建个人Git服务器；
+（2）备份旧 ssh keys ，并重新生成新的 ssh keys；
+（3）想到旧的 ssh keys 是提供给GitHub要用的就又改回去；
+（4）再 push 项目到 Github 的时候，提示让我输入 id_rsa。正确输入 id_rsa 后遇到了作者所述异常；
+
+这个就是备份备份旧 ssh keys ，并重新生成新的 ssh keys；
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ cd ~/.ssh
+
+admin@admin-PC MINGW64 ~/.ssh
+$ mkdir key_backup
+
+admin@admin-PC MINGW64 ~/.ssh
+$ cp id_rsa* key_backup
+
+admin@admin-PC MINGW64 ~/.ssh
+$ rm id_rsa*
+
+admin@admin-PC MINGW64 ~/.ssh
+$ ssh-keygen -t rsa -C "15827408750@163.com"
+
+admin@admin-PC MINGW64 ~/.ssh   //这里也要检查。
+$ ssh git@github.com
+
+admin@admin-PC MINGW64 ~/.ssh
+$ cd ..
+
+admin@admin-PC MINGW64 ~
+$ cd E:/
+
+admin@admin-PC MINGW64 /e
+$ cd studyHard
+
+admin@admin-PC MINGW64 /e    //把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库
+$ git remote add origin git@github.com:yangmqCM/studyHard.git
+
+admin@admin-PC MINGW64 /e/studyHard (master) //把本地库的所有内容推送到远程库上
+$ git push -u origin master
+
+Counting objects: 21, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (19/19), done.
+Writing objects: 100% (21/21), 1.81 KiB | 0 bytes/s, done.
+Total 21 (delta 9), reused 0 (delta 0)
+remote: Resolving deltas: 100% (9/9), done.
+To github.com:yangmqCM/studyHard.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+
+https://segmentfault.com/q/1010000003061640
+http://blog.csdn.net/echo_oy/article/details/53375655(这些就是如果你的ssh的钥匙没有弄好，参考)
+
+
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git； 
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容； 
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
+
+
+以下步骤比较清晰：来源（http://blog.csdn.net/echo_oy/article/details/53375655  echo_oy的csdn博客）
+一、git基本配置
+在https://github.com/中下载git后，安装并运行git
+1.首先检测SSH keys，若已经存在key，则直接进入第三步
+
+cd ~/.ssh
+2.将原来的SSH keys备份并删除
+
+mkdir key_backup
+cp id_rsa* key_backup
+rm id_rsa*
+3.创建一个新的SSH key
+
+复制代码
+ssh-keygen -t rsa -C "your_email@youremail.com"
+Creates a new ssh key using the provided email Generating public/private rsa key pair.
+#此处输入将要保存的路径，默认为当前路径
+Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):<press enter>
+输入回车后提示输入一个类似于密码的自定义的通行证号，如果直接回车则为空
+Enter passphrase (empty for no passphrase):<enter a passphrase>
+#提示重新输入以便确认输入是否正确
+Enter same passphrase again:<enter passphrase again>
+复制代码
+如果看到Your public key has been saved等信息则说明保存成功
+4.将SSH key输入到GitHub网站中
+在：Account Settings->SSH Pbulic Keys>单击Add another public key
+将刚才新建的key输入到key中并且添加一个标题，例如：git-tutorial。即/Users/your_user_directory/.ssh/id_rsa。默认情况下.ssh是隐藏文件，需要将系统设置成显示隐藏文件才能看到。输入完成后单击Add key后，会看到git-tutorial已经被添加进去了。
+5.测试是否能够正确链接到github中，输入以下命令：
+
+ssh -T git@github.com
+
+
+over.....
+next.....
+
+二、配置个人信息
+当上面步骤完成后，就可以设置一些基本的个人信息了
+1.设置用户名和邮箱
+Git通过检测用户名和邮箱来跟踪进行commit的用户
+
+git config --global user.name "Firstname Lastname"
+git config --global user.email "your_email@youremail.com"
+2.设置GitHub网站标记
+单击网站中的Account Settings>Account Admin,将APT Token中的那串字符串记录下来，输入到下列命令中：
+
+git config --global github.user username
+git config --global github.token 获取到的token
+
+***********************************************
+这里需要注意一下：
+github.token
+为啥要使用github.token，因为yii需要用到这个，那么yii又是啥，是php的一个框架。
+这是我目前对这个的了解
+所以我没有获取这个。
+***********************************************
+2.设置GitHub网站标记
+单击网站中的Account Settings>Account Admin,将APT Token中的那串字符串记录下来，输入到下列命令中：
+
+git config --global github.user username
+git config --global github.token 获取到的token
+————————————————————————————————————————————————————————————————————————————————————
+github.token获取：
+
+参考http://blog.csdn.net/u014175572/article/details/55510825
+https://www.cnblogs.com/jianqingwang/p/6840738.html
+————————————————————————————————————————————————————————————————————————————————————
+
+三、创建一个新的代码库
+打开网站中的创建代码库按钮，或直接使用https://github.com/repositories/new链接打开。
+输入相应的信息后单击创建按钮。
+实例：
+1.创建完成后在本地创建一个文件夹并在该文件夹下创建一个README文件
+
+mkdir ~/Hello-World 在user目录下创建一个名为Hello-World的项目文件夹(~代表用户目录，即：C:\Documents and Settings\当前登陆系统的用户名)
+cd ~/Hello-World 更改当前目录到Hello-World目录中
+git init 初始化该文件夹，将会提示以下信息：
+Initialized empty Git repository in /Users/your_user_directory/Hello-World/.git/
+touch README
+2.创建完README以后就需要添加并提交文件了
+
+git add README
+git commit -m "first commit"
+至此已经将要更改的文件提交到头信息中，但并没有真正提交到网站上去，还需要执行下面两个命令：
+
+git remote add origin git@github.com:gbyukg/zf-tutorial.git(若是第一次提交该项目的文件或是修改项目文件名后则需要这行这个命令，以后就可不用执行该命令)
+git push -u origin master
+
+
+开心吧！接下来开始使用git为编程带来乐趣吧！不够还要多多学习git的命令咯！
+again:  https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013752340242354807e192f02a44359908df8a5643103a000   廖雪峰的官方网站(这里我没有参考官方的教程)
+
+https://git-scm.com/book/zh/v1/（官网详细教程）
+
+http://git.mydoc.io/?t=154712（码云文档）
+
+
+
+
+
+
