@@ -1,3 +1,4 @@
 git is a version control system
 Git is free software distributed under the Gpl
-Git的命令实在是太多了，焦灼咋记录哟
+Git的命令实在是太多了，焦灼咋记录哟。
+多次使用，记得使用，每天使用，每天重复
