@@ -738,6 +738,21 @@ de626e1 append GPL
 9284d01 add 3 files
 a7dd746 wrote a readme file
 
+看日志
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git log --s
+--shortstat                --src-prefix=
+--show-signature           --stat
+--simplify-by-decoration   --submodule
+--simplify-merges          --submodule=
+--since=                   --summary
+--sparse
+
+admin@admin-PC MINGW64 /e/studyHard (master)
+$ git log --s
+
+
+
 admin@admin-PC MINGW64 /e/studyHard (master)
 $ git tag v0.2 fffb368
 
@@ -856,6 +871,106 @@ https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b
 https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
 
 
+
+小技巧：
+
+在输入 Git 命令的时候可以敲两次跳格键（Tab），就会看到列出所有匹配的可用命令建议： 
+$ git co<tab><tab>
+commit config
+此例中，键入 git co 然后连按两次 Tab 键，会看到两个相关的建议（命令） commit 和 config。继而输入 m<tab> 会自动完成 git commit 命令的输入。
+
+命令的选项也可以用这种方式自动完成，其实这种情况更实用些。比如运行 git log 的时候忘了相关选项的名字，可以输入开头的几个字母，然后敲 Tab 键看看有哪些匹配的： 
+$ git log --s<tab>
+--shortstat  --since=  --src-prefix=  --stat   --summary
+
+
+
+小知识：
+从远程仓库抓取数据
+正如之前所看到的，可以用下面的命令从远程仓库抓取数据到本地：
+ 
+$ git fetch [remote-name]
+
+如果是克隆了一个仓库，此命令会自动将远程仓库归于 origin 名下。所以，git fetch origin 会抓取从你上次克隆以来别人上传到此远程仓库中的所有更新（或是上次 fetch 以来别人提交的更新）。有一点很重要，需要记住，fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能手工合并。
+
+如果设置了某个分支用于跟踪某个远端仓库的分支（参见下节及第三章的内容），可以使用 git pull 命令自动抓取数据下来，然后将远端分支自动合并到本地仓库中当前分支。在日常工作中我们经常这么用，既快且好。实际上，默认情况下 git clone 命令本质上就是自动创建了本地的 master 分支用于跟踪远程仓库中的 master 分支（假设远程仓库确实有 master 分支）。所以一般我们运行 git pull，目的都是要从原始克隆的远端仓库中抓取数据后，合并到工作目录中的当前分支。
+
+
+远程仓库的删除和重命名
+在新版 Git 中可以用 git remote rename 命令修改某个远程仓库在本地的简称，比如想把 pb 改成 paul，可以这么运行：
+
+$ git remote rename pb paul
+$ git remote
+origin
+paul
+注意，对远程仓库的重命名，也会使对应的分支名称发生变化，原来的 pb/master 分支现在成了 paul/master。
+
+碰到远端仓库服务器迁移，或者原来的克隆镜像不再使用，又或者某个参与者不再贡献代码，那么需要移除对应的远端仓库，可以运行 git remote rm 命令：
+
+$ git remote rm paul
+$ git remote
+origin
+
+这两个多看看，遇到多用
+https://git-scm.com/book/zh/v1
+https://git-scm.com/book/zh/v1/Git-基础-查看提交历史
+https://git-scm.com/book/zh/v1/Git-基础-记录每次更新到仓库
+https://git-scm.com/book/zh/v1/Git-分支-远程分支    （*****协同开发的时候很重要，对于分支的处理*******）
+
+********************************************************************
+了解gpg公钥：   http://wiki.ubuntu.org.cn/GPG/PGP
+
+
 Git的官方网站：http://git-scm.com
 
 Git的官方网站中文https://git-scm.com/book/zh/v1/
+
+
+以上只是简单的操作：
+Git的官方网站中文https://git-scm.com/book/zh/v1/
+还需要了解这些。 
+. 服务器上的 Git
+.1 协议
+.2 在服务器上部署 Git
+.3 生成 SSH 公钥
+.4 架设服务器
+.5 公共访问
+.6 GitWeb
+.7 Gitosis
+.8 Gitolite
+.9 Git 守护进程
+.10 Git 托管服务
+.11 小结
+. 分布式 Git
+.1 分布式工作流程
+.2 为项目作贡献
+.3 项目的管理
+.4 小结
+. Git 工具
+.1 修订版本（Revision）选择
+.2 交互式暂存
+.3 储藏（Stashing）
+.4 重写历史
+.5 使用 Git 调试
+.6 子模块
+.7 子树合并
+.8 总结
+. 自定义 Git
+.1 配置 Git
+.2 Git属性
+.3 Git挂钩
+.4 Git 强制策略实例
+.5 总结
+. Git 与其他系统
+.1 Git 与 Subversion
+.2 迁移到 Git
+.3 总结
+. Git 内部原理
+.1 底层命令 (Plumbing) 和高层命令 (Porcelain)
+.2 Git 对象
+.3 Git References
+.4 Packfiles
+.5 The Refspec
+.6 传输协议
+.7 维护及数据恢复
+.8 总结
