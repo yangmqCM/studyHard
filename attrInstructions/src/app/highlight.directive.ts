@@ -1,15 +1,16 @@
-import { Directive,ElementRef,HostListener } from '@angular/core';
+import { Directive,ElementRef,HostListener,Input} from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]'//'[]'属性型选择器
 }) 
 export class HighlightDirective {
 	
-  constructor(private  el:ElementRef) {  
-  //el.nativeElement.style.backgroundColor = 'yellow'; 
+  constructor(private  el:ElementRef) {   
   }  
-	@HostListener('mouseenter') onMouseEnter(){
-		this.hightlight('yellow');
+  @Input('appHighlight') hightlightColor: string;
+  
+	@HostListener('mouseenter') onMouseEnter(){ 
+	 this.hightlight(this.hightlightColor||'red');
 	}
 	
 	@HostListener('mouseleave') onMouseLeave(){
@@ -18,4 +19,5 @@ export class HighlightDirective {
 	private hightlight(color:string){
 			this.el.nativeElement.style.backgroundColor = color;
 	}
+	
 }
