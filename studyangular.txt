@@ -55,4 +55,6 @@ npm install angular-in-memory-web-api --save
 
 属性型指令改变一个元素的外观或行为。例如，内置的 NgStyle 指令可以同时修改元素的多个样式。
 
+三个常用的内置结构型指令 —— NgIf、NgFor和NgSwitch.
+
 
