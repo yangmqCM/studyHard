@@ -1,0 +1,43 @@
+组件定义视图。视图是一组可见的屏幕元素，Angular 可以根据你的程序逻辑和数据来选择和修改它们。 每个应用都至少有一个根组件。
+
+组件使用服务。服务会提供那些与视图不直接相关的功能。服务提供商可以作为依赖被注入到组件中， 这能让你的代码更加模块化、可复用，而且高效
+
+npm install -g @angular/cli 
+ng new my-app 
+cd my-app
+ng serve --open
+ 
+
+要将此绑定转换成使用对象，需要把这个英雄名字数组变成 Hero 对象数组。但首先得有一个 Hero 类。
+ng generate class hero
+
+运行下列命令来生成一个新项目以及应用的骨架代码：
+ng new my-app
+进入项目目录，并启动服务器。
+cd my-app
+ng serve --open
+
+使用 Angular CLI 创建一个名为 heroes 的新组件。
+ng generate component heroes
+
+使用 Angular CLI 创建一个名叫 hero 的服务。
+ng generate service hero
+
+这是一个常用的选择，因此你可以通过 --module=app 选项让 CLI 自动把它提供给 AppModule。
+ng generate service hero --module=app
+          
+按照惯例，这个模块类的名字叫做 APPRoutingModule，并且位于 src/app 下的 app-routing.module.ts 文件中。
+
+指令文件怎么生成？“ng generate directive ad”
+使用 CLI 生成它。 
+ 
+ 当使用 --inline-styles 标识创建组件时，CLI 就会定义一个空的 styles 数组
+ng generate module app-routing --flat --module=app
+
+
+
+从 npm 中安装这个内存 Web API 包（译注：请使用 0.5+ 的版本，不要使用 0.4-） 
+npm install angular-in-memory-web-api --save
+
+
+
