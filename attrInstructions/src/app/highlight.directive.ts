@@ -8,9 +8,10 @@ export class HighlightDirective {
   constructor(private  el:ElementRef) {   
   }  
   @Input('appHighlight') hightlightColor: string;
+  @Input() defaultColor: string;
   
 	@HostListener('mouseenter') onMouseEnter(){ 
-	 this.hightlight(this.hightlightColor||'red');
+	 this.hightlight(this.hightlightColor|| this.defaultColor ||'red');
 	}
 	
 	@HostListener('mouseleave') onMouseLeave(){
