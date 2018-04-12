@@ -58,3 +58,4 @@ npm install angular-in-memory-web-api --save
 三个常用的内置结构型指令 —— NgIf、NgFor和NgSwitch.
 
 
+下面开始结构型属性demo的练习
