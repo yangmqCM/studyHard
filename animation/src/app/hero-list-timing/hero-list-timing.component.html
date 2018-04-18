@@ -1,0 +1,8 @@
+<ul>
+	<li *ngFor="let hero of heroes"
+		[@flyInOut]="'in'"
+		(click)="hero.toggleState()"
+		>
+		{{hero.name}}
+	</li>
+</ul>
